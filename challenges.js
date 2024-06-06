@@ -22,3 +22,45 @@ var removeDuplicates = function(nums) {
     }
     return k
 };
+//challenge 3
+//q1
+var merge = function(nums1, m, nums2, n) {
+    let nums1end=m+n-1
+    m--
+    n--
+    while (m >=0 && n>=0){
+        if(nums1[m]>nums2[n]){
+            nums1[nums1end]=nums1[m]
+            m--
+        }else{
+            nums1[nums1end]=nums2[n]
+            n--
+        }
+        nums1end--
+    }
+
+    while(n>=0){
+        nums1[nums1end]=nums2[n]
+        n--
+        nums1end--
+    }
+
+
+};
+//q2
+var sortArray = function(nums) {
+    if(nums.length<=1){
+        return nums
+    }
+    const pivot =nums[0]
+    const left=[]
+    const right=[]
+    for(let i=1; i<nums.length;i++){
+        if(nums[i]<pivot){
+            left.push(nums[i])
+        }else{
+            right.push(nums[i])
+        }
+    }
+    return [...sortArray(left),pivot,...sortArray(right)]
+};
