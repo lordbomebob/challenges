@@ -211,6 +211,53 @@ class LinkedList {
         current.data = data; // Update the data that we want.
 
     }
+    merge(data){
+        let current=this.head
+        let llc=data.head
+        
+        let storage=new Node(0)
+        if(current.data>=llc.data){
+            this.head=llc
+        }
+        while(current && llc){
+            
+            if(current.data<=llc.data){
+                storage.next = current
+                current=current.next
+            }else{
+                storage.next= llc
+                llc=llc.next
+            }
+            storage=storage.next;
+        }
+        if (current) {
+            storage.next = current;
+        } else {
+            storage.next = llc;
+        }
+        
+        this.size+=data.size
+    }
+
+
+    deleteAtEnd(index){
+        if (index < 0 || index > this.size) {
+            return null; // Out of bounds
+        }
+        if (index === 0) {
+            return this.removeLast();
+        }
+        let current=this.head
+        let previous=null
+        let count=0
+        while (count < this.size-index) {
+            previous=current
+            current=current.next
+            count++
+        }
+        previous.next = current.next;
+        this.size--;
+    }
 }
 
 let linkedList = new LinkedList();
@@ -228,5 +275,23 @@ linkedList.updateAt(25, 3);
 linkedList.printList();
 
 linkedList.removeLast()
-
+linkedList.printList();
+linkedList.deleteAtEnd(2)
+linkedList.printList();
 // Blockchain
+let linkedList2 = new LinkedList();
+let linkedList3 = new LinkedList();
+linkedList2.prepend(8)
+linkedList2.prepend(7)
+linkedList2.prepend(5)
+linkedList2.prepend(3)
+linkedList2.prepend(1)
+linkedList3.prepend(15)
+linkedList3.prepend(12)
+linkedList3.prepend(6)
+linkedList3.prepend(4)
+linkedList3.prepend(2)
+linkedList2.printList();
+linkedList3.printList()
+linkedList2.merge(linkedList3)
+linkedList2.printList();
