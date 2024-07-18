@@ -203,3 +203,56 @@ MyStack.prototype.empty = function() {
  * var param_3 = obj.top()
  * var param_4 = obj.empty()
  */
+
+//Definition for a binary tree node.
+function TreeNode(val, left, right) {
+    this.val = (val===undefined ? 0 : val)
+    this.left = (left===undefined ? null : left)
+    this.right = (right===undefined ? null : right)
+}
+
+var preorderTraversal = function(root) {
+    let arr=[]
+    if(!root){
+        return arr
+    }
+    arr.push(root.val)
+    if(root.left){
+        arr.push(...preorderTraversal(root.left))
+    }
+    if(root.right){
+        arr.push(...preorderTraversal(root.right))
+    }
+    return arr
+};
+
+var postorderTraversal = function(root) {
+    let arr=[]
+    if(!root){
+        return arr
+    }
+    if(root.left){
+        arr.push(...postorderTraversal(root.left))
+    }
+    if(root.right){
+        arr.push(...postorderTraversal(root.right))
+    }
+    arr.push(root.val)
+    return arr
+};
+
+var inorderTraversal = function(root) {
+    let arr=[]
+    if(!root){
+        return arr
+    }
+    if(root.left){
+        arr.push(...inorderTraversal(root.left))
+    }
+    arr.push(root.val)
+    if(root.right){
+        arr.push(...inorderTraversal(root.right))
+    }
+    
+    return arr
+}; 
